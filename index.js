@@ -4,25 +4,17 @@ const mineflayer = require('mineflayer');
 const md = require('./manageDate');
 
 // --- bot server and login information
-const PORT_NUMBER = 12345; // -=CHANGEME=- the port number of minecraft server
-const BOT_USERNAME = "Chat_Log"; // -=CHANGEME=- the in game name of the bot
+const PORT_NUMBER = 12345; // CHANGEME the port number of minecraft server
+const BOT_USERNAME = "Chat_Log"; // CHANGEME the in game name of the bot
 const settings = {
 	host: "localhost",
 	port: PORT_NUMBER,
 	username: BOT_USERNAME,
 };
 
-const TIMEZONE = "America/Los_Angeles"; // -=CHANGEME=- the timezone used to log the chat
+const TIMEZONE = "America/Los_Angeles"; // CHANGEME the timezone used to log the chat
+const DATE_LANGUAGE_FORMAT = "en-US"; // CHANGEME the language format to represent the dates
 const bot = mineflayer.createBot(settings);
-
-// -- basic bot event listeners
-bot.once('spawn', () => {
-    console.log(`${BOT_USERNAME} spawned`);
-    md.setTimezone(TIMEZONE);
-});
-bot.on("death", () => console.log(`${BOT_USERNAME} died`));
-bot.on("kicked", (reason, loggedIn) => console.log(reason, loggedIn));
-bot.on("error", err => console.log(err));
 
 async function logChat(fileName, logMessage) {
     try {
@@ -31,6 +23,17 @@ async function logChat(fileName, logMessage) {
         console.log(e);
     }
 }
+
+// -- basic bot event listeners
+bot.once('spawn', () => {
+    console.log(`${BOT_USERNAME} spawned`);
+    md.setTimezone(TIMEZONE);
+    md.setDateLanguageFormat(DATE_LANGUAGE_FORMAT);
+});
+
+bot.on("death", () => console.log(`${BOT_USERNAME} died`));
+bot.on("kicked", (reason, loggedIn) => console.log(reason, loggedIn));
+bot.on("error", err => console.log(err));
 
 // --- bot chat listener
 bot.on("chat", async (username, message) => {

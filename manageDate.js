@@ -1,12 +1,17 @@
 var TIMEZONE = "America/Los_Angeles";
+var DATE_LANGUAGE_FORMAT = "en-US";
 
 function setTimezone(timezone) {
     TIMEZONE = timezone;
 }
 
+function setDateLanguageFormat(languageFormat) {
+    DATE_LANGUAGE_FORMAT = languageFormat
+}
+
 function getCurrentDate() {
     let date = new Date();
-    let newData = date.toLocaleString('en-US', {timeZone: TIMEZONE});
+    let newData = date.toLocaleString(DATE_LANGUAGE_FORMAT, {timeZone: TIMEZONE});
     return newData;
 }
 
@@ -28,6 +33,7 @@ function getTime(Date) {
 
 module.exports = {
     setTimezone: setTimezone,
+    setDateLanguageFormat: setDateLanguageFormat,
     getCurrentDate: getCurrentDate,
     getFullYear: getFullYear,
     getMonth: getMonth,
