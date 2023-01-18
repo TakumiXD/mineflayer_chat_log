@@ -1,0 +1,8 @@
+{
+    "settings": {
+        "port": "25565",
+        "username": "Chat_Log",
+        "timezone": "America/Los_Angeles",
+        "dateLanguageFormat": "en-US"
+    }
+}
